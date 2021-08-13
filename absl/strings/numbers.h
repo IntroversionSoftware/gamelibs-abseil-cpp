@@ -24,7 +24,7 @@
 #define ABSL_STRINGS_NUMBERS_H_
 
 #ifdef __SSE4_2__
-#include <x86intrin.h>
+#include <immintrin.h>
 #endif
 
 #include <cstddef>
