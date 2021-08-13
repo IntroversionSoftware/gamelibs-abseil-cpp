@@ -120,9 +120,6 @@
     <ClCompile Include="..\absl\hash\internal\hash.cc">
       <Filter>hash\internal</Filter>
     </ClCompile>
-    <ClCompile Include="..\absl\hash\internal\print_hash_of.cc">
-      <Filter>hash\internal</Filter>
-    </ClCompile>
     <ClCompile Include="..\absl\hash\internal\wyhash.cc">
       <Filter>hash\internal</Filter>
     </ClCompile>

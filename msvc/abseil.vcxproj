@@ -258,7 +258,6 @@
     <ClCompile Include="..\absl\flags\usage_config.cc" />
     <ClCompile Include="..\absl\hash\internal\city.cc" />
     <ClCompile Include="..\absl\hash\internal\hash.cc" />
-    <ClCompile Include="..\absl\hash\internal\print_hash_of.cc" />
     <ClCompile Include="..\absl\hash\internal\wyhash.cc" />
     <ClCompile Include="..\absl\numeric\int128.cc" />
     <ClCompile Include="..\absl\random\discrete_distribution.cc" />
