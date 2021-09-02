@@ -3,7 +3,7 @@ project('abseil', 'cpp')
 compiler = meson.get_compiler('cpp')
 link_deps = []
 incdirs = ['.']
-c_flags = []
+cpp_flags = ['-Wno-non-virtual-dtor']
 
 sources = [
   'absl/base/internal/cycleclock.cc',
@@ -130,7 +130,7 @@ incdirs = include_directories(incdirs)
 abseil = static_library(
     'absl',
     sources,
-    c_args: c_flags,
+    cpp_args: cpp_flags,
     include_directories: incdirs,
     dependencies: link_deps,
 )
