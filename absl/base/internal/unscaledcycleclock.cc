@@ -133,6 +133,15 @@ int64_t UnscaledCycleClock::Now() {
 double UnscaledCycleClock::Frequency() {
   return base_internal::NominalCPUFrequency();
 }
+#elif defined(_M_ARM64)
+
+#pragma intrinsic(_ReadStatusReg)
+
+#define ARM64_CNTFRQ            ARM64_SYSREG(3,3,14,0,0)
+#define ARM64_CNTVCT            ARM64_SYSREG(3,3,14,0,2)
+
+int64_t UnscaledCycleClock::Now() { return _ReadStatusReg(ARM64_CNTVCT); }
+double UnscaledCycleClock::Frequency() { return (double)_ReadStatusReg(ARM64_CNTFRQ); }
 
 #elif defined(_M_IX86) || defined(_M_X64)
 
