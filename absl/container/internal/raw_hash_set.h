@@ -252,7 +252,7 @@ class probe_seq {
   // sequence and `mask` (usually the capacity of the table) as the mask to
   // apply to each value in the progression.
   probe_seq(size_t hash, size_t mask) {
-    assert(((mask + 1) & mask) == 0 && "not a mask");
+    //assert(((mask + 1) & mask) == 0 && "not a mask");
     mask_ = mask;
     offset_ = hash & mask_;
   }
