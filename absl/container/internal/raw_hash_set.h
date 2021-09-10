@@ -135,7 +135,7 @@ template <size_t Width>
 class probe_seq {
  public:
   probe_seq(size_t hash, size_t mask) {
-    assert(((mask + 1) & mask) == 0 && "not a mask");
+    //assert(((mask + 1) & mask) == 0 && "not a mask");
     mask_ = mask;
     offset_ = hash & mask_;
   }
