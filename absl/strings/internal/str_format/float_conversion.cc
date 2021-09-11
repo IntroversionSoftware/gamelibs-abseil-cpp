@@ -14,6 +14,9 @@
 
 #include "absl/strings/internal/str_format/float_conversion.h"
 
+// Having troubles getting this to compile with /Gv (vectorcall)
+#if 0
+
 #include <string.h>
 
 #include <algorithm>
@@ -1421,3 +1424,5 @@ bool ConvertFloatImpl(double v, const FormatConversionSpecImpl &conv,
 }  // namespace str_format_internal
 ABSL_NAMESPACE_END
 }  // namespace absl
+
+#endif
