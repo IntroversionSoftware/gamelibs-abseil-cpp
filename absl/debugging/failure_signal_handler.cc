@@ -64,7 +64,7 @@ ABSL_CONST_INIT static FailureSignalHandlerOptions fsh_options;
 
 // Resets the signal handler for signo to the default action for that
 // signal, then raises the signal.
-static void RaiseToDefaultHandler(int signo) {
+static void __CRTDECL RaiseToDefaultHandler(int signo) {
   signal(signo, SIG_DFL);
   raise(signo);
 }
@@ -78,7 +78,7 @@ struct FailureSignalData {
   using StructSigaction = struct sigaction;
   #define FSD_PREVIOUS_INIT FailureSignalData::StructSigaction()
 #else
-  void (*previous_handler)(int);
+  void (__CRTDECL *previous_handler)(int);
   #define FSD_PREVIOUS_INIT SIG_DFL
 #endif
 };
@@ -97,7 +97,7 @@ ABSL_CONST_INIT static FailureSignalData failure_signal_data[] = {
 
 #undef FSD_PREVIOUS_INIT
 
-static void RaiseToPreviousHandler(int signo) {
+static void __CRTDECL RaiseToPreviousHandler(int signo) {
   // Search for the previous handler.
   for (const auto& it : failure_signal_data) {
     if (it.signo == signo) {
@@ -117,7 +117,7 @@ static void RaiseToPreviousHandler(int signo) {
 
 namespace debugging_internal {
 
-const char* FailureSignalToString(int signo) {
+const char* __CRTDECL FailureSignalToString(int signo) {
   for (const auto& it : failure_signal_data) {
     if (it.signo == signo) {
       return it.as_string;
@@ -209,7 +209,7 @@ static void InstallOneFailureHandler(FailureSignalData* data,
 #else
 
 static void InstallOneFailureHandler(FailureSignalData* data,
-                                     void (*handler)(int)) {
+                                     void (__CRTDECL *handler)(int)) {
   data->previous_handler = signal(data->signo, handler);
   ABSL_RAW_CHECK(data->previous_handler != SIG_ERR, "signal() failed");
 }
@@ -317,7 +317,7 @@ using GetTidType = decltype(absl::base_internal::GetTID());
 ABSL_CONST_INIT static std::atomic<GetTidType> failed_tid(0);
 
 #ifndef ABSL_HAVE_SIGACTION
-static void AbslFailureSignalHandler(int signo) {
+static void __CRTDECL AbslFailureSignalHandler(int signo) {
   void* ucontext = nullptr;
 #else
 static void AbslFailureSignalHandler(int signo, siginfo_t*, void* ucontext) {
