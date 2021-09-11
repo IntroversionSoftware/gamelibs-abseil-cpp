@@ -743,6 +743,7 @@ static_assert(ABSL_INTERNAL_INLINE_NAMESPACE_STR[0] != 'h' ||
 #endif
 #else
 #define ABSL_DLL
+#define __CRTDECL
 #endif  // defined(_MSC_VER)
 
 // ABSL_HAVE_MEMORY_SANITIZER
