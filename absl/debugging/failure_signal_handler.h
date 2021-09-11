@@ -112,7 +112,7 @@ struct FailureSignalHandlerOptions {
 void InstallFailureSignalHandler(const FailureSignalHandlerOptions& options);
 
 namespace debugging_internal {
-const char* FailureSignalToString(int signo);
+const char* __CRTDECL FailureSignalToString(int signo);
 }  // namespace debugging_internal
 
 ABSL_NAMESPACE_END
