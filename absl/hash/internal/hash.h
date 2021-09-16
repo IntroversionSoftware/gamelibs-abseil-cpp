@@ -38,6 +38,25 @@
 #include <utility>
 #include <vector>
 
+
+#if defined(_M_IX86) || defined(_M_X64) || defined(__i386__) || defined(__x86_64__)
+#  define USE_XXH_DISPATCH
+#  define XXH_VECTOR XXH_SSE2
+#endif
+
+#if defined(_M_ARM64) || defined(_M_ARM) || defined(__arm__) || defined(__aarch64__)
+#  define XXH_VECTOR XXH_NEON
+#endif
+
+#if defined(USE_XXH_DISPATCH)
+#include "xxh_x86dispatch.h"
+#else
+#include "xxhash.h"
+#endif
+
+#undef USE_XXH_DISPATCH
+#undef XXH_VECTOR
+
 #include "absl/base/config.h"
 #include "absl/base/internal/unaligned_access.h"
 #include "absl/base/port.h"
@@ -880,11 +899,7 @@ class ABSL_DLL MixingHashState : public HashStateBase<MixingHashState> {
 
   ABSL_ATTRIBUTE_ALWAYS_INLINE static uint64_t Hash64(const unsigned char* data,
                                                       size_t len) {
-#ifdef ABSL_HAVE_INTRINSIC_INT128
-    return LowLevelHashImpl(data, len);
-#else
-    return absl::hash_internal::CityHash64(reinterpret_cast<const char*>(data), len);
-#endif
+    return XXH3_64bits(data, len);
   }
 
   // Seed()

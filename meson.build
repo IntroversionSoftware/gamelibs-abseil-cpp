@@ -1,7 +1,9 @@
 project('abseil', 'cpp')
 
 compiler = meson.get_compiler('cpp')
-link_deps = []
+link_deps = [
+    dependency('xxhash')
+]
 incdirs = ['.']
 cpp_flags = ['-Wno-non-virtual-dtor']
 
