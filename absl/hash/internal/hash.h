@@ -875,7 +875,7 @@ class ABSL_DLL MixingHashState : public HashStateBase<MixingHashState> {
   }
 
   ABSL_ATTRIBUTE_ALWAYS_INLINE static uint64_t Mix(uint64_t state, uint64_t v) {
-#if defined(__aarch64__)
+#if 1 || defined(__aarch64__)
     // On AArch64, calculating a 128-bit product is inefficient, because it
     // requires a sequence of two instructions to calculate the upper and lower
     // halves of the result.
@@ -963,19 +963,8 @@ inline uint64_t MixingHashState::CombineContiguousImpl(
   // For large values we use LowLevelHash or CityHash depending on the platform,
   // for small ones we just use a multiplicative hash.
   uint64_t v;
-  if (len > 16) {
-    if (ABSL_PREDICT_FALSE(len > PiecewiseChunkSize())) {
-      return CombineLargeContiguousImpl64(state, first, len);
-    }
+  if (len > 0) {
     v = Hash64(first, len);
-  } else if (len > 8) {
-    auto p = Read9To16(first, len);
-    state = Mix(state, p.first);
-    v = p.second;
-  } else if (len >= 4) {
-    v = Read4To8(first, len);
-  } else if (len > 0) {
-    v = Read1To3(first, len);
   } else {
     // Empty ranges have no effect.
     return state;
