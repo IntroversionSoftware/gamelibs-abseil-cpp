@@ -38,7 +38,7 @@
 #endif
 
 #if defined(ABSL_INTERNAL_USE_X86_CPUID)
-#if defined(_WIN32) || defined(_WIN64)
+#if !defined(__clang__) && (defined(_WIN32) || defined(_WIN64))
 #include <intrin.h>  // NOLINT(build/include_order)
 #pragma intrinsic(__cpuid)
 #else
