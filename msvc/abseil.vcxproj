@@ -202,7 +202,6 @@
   <ItemGroup>
     <ClCompile Include="..\absl\base\internal\cycleclock.cc" />
     <ClCompile Include="..\absl\base\internal\low_level_alloc.cc" />
-    <ClCompile Include="..\absl\base\internal\periodic_sampler.cc" />
     <ClCompile Include="..\absl\base\internal\raw_logging.cc" />
     <ClCompile Include="..\absl\base\internal\scoped_set_env.cc" />
     <ClCompile Include="..\absl\base\internal\spinlock.cc" />
@@ -344,7 +343,6 @@
     <ClInclude Include="..\absl\base\internal\invoke.h" />
     <ClInclude Include="..\absl\base\internal\low_level_alloc.h" />
     <ClInclude Include="..\absl\base\internal\low_level_scheduling.h" />
-    <ClInclude Include="..\absl\base\internal\periodic_sampler.h" />
     <ClInclude Include="..\absl\base\internal\per_thread_tls.h" />
     <ClInclude Include="..\absl\base\internal\pretty_function.h" />
     <ClInclude Include="..\absl\base\internal\raw_logging.h" />
