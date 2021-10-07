@@ -138,9 +138,6 @@
     <ClCompile Include="..\absl\base\internal\low_level_alloc.cc">
       <Filter>base\internal</Filter>
     </ClCompile>
-    <ClCompile Include="..\absl\base\internal\periodic_sampler.cc">
-      <Filter>base\internal</Filter>
-    </ClCompile>
     <ClCompile Include="..\absl\base\internal\raw_logging.cc">
       <Filter>base\internal</Filter>
     </ClCompile>
@@ -663,9 +660,6 @@
       <Filter>base\internal</Filter>
     </ClInclude>
     <ClInclude Include="..\absl\base\internal\per_thread_tls.h">
-      <Filter>base\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\absl\base\internal\periodic_sampler.h">
       <Filter>base\internal</Filter>
     </ClInclude>
     <ClInclude Include="..\absl\base\internal\pretty_function.h">
