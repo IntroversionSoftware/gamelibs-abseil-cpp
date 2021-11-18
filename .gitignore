@@ -1,3 +1,4 @@
+/obj
 # Ignore all bazel-* symlinks.
 /bazel-*
 # Ignore Bazel verbose explanations
