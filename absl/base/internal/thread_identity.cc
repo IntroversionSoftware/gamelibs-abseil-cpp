@@ -61,7 +61,7 @@ __attribute__((visibility("protected")))
 #endif  // ABSL_HAVE_ATTRIBUTE(visibility) && !defined(__APPLE__)
 #if ABSL_PER_THREAD_TLS
 // Prefer __thread to thread_local as benchmarks indicate it is a bit faster.
-ABSL_PER_THREAD_TLS_KEYWORD ThreadIdentity* thread_identity_ptr = nullptr;
+ABSL_CONST_INIT ABSL_PER_THREAD_TLS_KEYWORD ThreadIdentity* thread_identity_ptr = nullptr;
 #elif defined(ABSL_HAVE_THREAD_LOCAL)
 thread_local ThreadIdentity* thread_identity_ptr = nullptr;
 #endif  // ABSL_PER_THREAD_TLS
