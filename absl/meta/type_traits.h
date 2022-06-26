@@ -491,8 +491,7 @@ struct is_trivially_move_assignable
 template <typename T>
 struct is_trivially_copy_assignable
     : std::integral_constant<
-          bool, __has_trivial_assign(typename std::remove_reference<T>::type) &&
-                    absl::is_copy_assignable<T>::value> {
+          bool, __is_trivially_assignable(std::add_lvalue_reference_t<T>, std::add_lvalue_reference_t<const T>)> {
 #ifdef ABSL_HAVE_STD_IS_TRIVIALLY_ASSIGNABLE
  private:
   static constexpr bool compliant =
