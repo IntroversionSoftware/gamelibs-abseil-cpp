@@ -129,9 +129,11 @@ inline uint32_t CRC32_u32(uint32_t crc, uint32_t v) {
   return _mm_crc32_u32(crc, v);
 }
 
+#ifndef _M_IX86
 inline uint32_t CRC32_u64(uint32_t crc, uint64_t v) {
   return static_cast<uint32_t>(_mm_crc32_u64(crc, v));
 }
+#endif
 
 inline V128 V128_Load(const V128* src) { return _mm_load_si128(src); }
 
