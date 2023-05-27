@@ -69,7 +69,6 @@ sources = [
   'absl/log/internal/proto.cc',
   'absl/log/log_entry.cc',
   'absl/log/log_sink.cc',
-  'absl/log/scoped_mock_log.cc',
   'absl/numeric/int128.cc',
   'absl/profiling/internal/exponential_biased.cc',
   'absl/profiling/internal/periodic_sampler.cc',
