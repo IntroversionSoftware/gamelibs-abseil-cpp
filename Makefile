@@ -86,7 +86,6 @@ SOURCES := \
     absl/hash/internal/city.cc \
     absl/hash/internal/hash.cc \
     absl/hash/internal/low_level_hash.cc \
-    absl/hash/internal/print_hash_of.cc \
     absl/log/die_if_null.cc \
     absl/log/flags.cc \
     absl/log/globals.cc \
@@ -107,7 +106,6 @@ SOURCES := \
     absl/random/discrete_distribution.cc \
     absl/random/gaussian_distribution.cc \
     absl/random/internal/chi_square.cc \
-    absl/random/internal/gaussian_distribution_gentables.cc \
     absl/random/internal/pool_urbg.cc \
     absl/random/internal/randen.cc \
     absl/random/internal/randen_detect.cc \
@@ -177,16 +175,6 @@ SOURCES := \
     absl/time/clock.cc \
     absl/time/duration.cc \
     absl/time/format.cc \
-    absl/time/internal/cctz/src/civil_time_detail.cc \
-    absl/time/internal/cctz/src/time_zone_fixed.cc \
-    absl/time/internal/cctz/src/time_zone_format.cc \
-    absl/time/internal/cctz/src/time_zone_if.cc \
-    absl/time/internal/cctz/src/time_zone_impl.cc \
-    absl/time/internal/cctz/src/time_zone_info.cc \
-    absl/time/internal/cctz/src/time_zone_libc.cc \
-    absl/time/internal/cctz/src/time_zone_lookup.cc \
-    absl/time/internal/cctz/src/time_zone_posix.cc \
-    absl/time/internal/cctz/src/zone_info_source.cc \
     absl/time/time.cc \
     absl/types/bad_any_cast.cc \
     absl/types/bad_optional_access.cc \
