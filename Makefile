@@ -21,7 +21,7 @@ CXX     ?= g++
 RANLIB  ?= ranlib
 RM      ?= rm -f
 
-BUILD_DIR := obj
+BUILD_DIR := build
 BUILD_ID  ?= default-build-id
 OBJ_DIR   := $(BUILD_DIR)/$(BUILD_ID)
 
