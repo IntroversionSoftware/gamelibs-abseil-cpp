@@ -44,11 +44,6 @@ struct cctz_parts {
   cctz::detail::femtoseconds fem;
 };
 
-inline cctz::time_point<cctz::seconds> unix_epoch() {
-  return std::chrono::time_point_cast<cctz::seconds>(
-      std::chrono::system_clock::from_time_t(0));
-}
-
 // Splits a Time into seconds and femtoseconds, which can be used with CCTZ.
 // Requires that 't' is finite. See duration.cc for details about rep_hi and
 // rep_lo.
