@@ -454,6 +454,14 @@ inline bool join_seconds(const time_point<seconds>& sec, const femtoseconds&,
 }  // namespace detail
 }  // namespace cctz
 }  // namespace time_internal
+
+namespace {
+inline absl::time_internal::cctz::time_point<absl::time_internal::cctz::seconds> unix_epoch() {
+  return std::chrono::time_point_cast<absl::time_internal::cctz::seconds>(
+      std::chrono::system_clock::from_time_t(0));
+}
+} // namespace
+
 ABSL_NAMESPACE_END
 }  // namespace absl
 
