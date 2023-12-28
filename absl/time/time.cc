@@ -51,11 +51,6 @@ ABSL_NAMESPACE_BEGIN
 
 namespace {
 
-inline cctz::time_point<cctz::seconds> unix_epoch() {
-  return std::chrono::time_point_cast<cctz::seconds>(
-      std::chrono::system_clock::from_time_t(0));
-}
-
 // Floors d to the next unit boundary closer to negative infinity.
 inline int64_t FloorToUnit(absl::Duration d, absl::Duration unit) {
   absl::Duration rem;
