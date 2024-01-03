@@ -39,7 +39,7 @@ void InitializeSymbolizer(const char*) {
   if (process != nullptr) {
     return;
   }
-  process = GetCurrentProcess();
+  process = (HANDLE)static_cast<uintptr_t>(GetCurrentProcessId());
 
   // Symbols are not loaded until a reference is made requiring the
   // symbols be loaded. This is the fastest, most efficient way to use
