@@ -18,6 +18,7 @@
 #include <functional>
 #include <memory>
 #include <new>
+#include <optional>
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
@@ -46,8 +47,8 @@ struct PolicyWithoutOptionalOps {
   static std::function<Slot&(Slot*)> value;
 
   template <class Hash, bool kIsDefault>
-  static constexpr HashSlotFn get_hash_slot_fn() {
-    return nullptr;
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
+    return std::nullopt;
   }
 };
 
@@ -100,8 +101,8 @@ struct PolicyNoHashFn {
   }
 
   template <class Hash, bool kIsDefault>
-  static constexpr HashSlotFn get_hash_slot_fn() {
-    return nullptr;
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
+    return std::nullopt;
   }
 };
 
@@ -109,8 +110,8 @@ size_t* PolicyNoHashFn::apply_called_count;
 
 struct PolicyCustomHashFn : PolicyNoHashFn {
   template <class Hash, bool kIsDefault>
-  static constexpr HashSlotFn get_hash_slot_fn() {
-    return &TypeErasedApplyToSlotFn<Hash, int, kIsDefault>;
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
+    return std::optional<HashSlotFn>(&TypeErasedApplyToSlotFn<Hash, int, kIsDefault>);
   }
 };
 

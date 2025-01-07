@@ -83,7 +83,7 @@ struct Policy {
 
   template <class Hash, bool kIsDefault>
   static constexpr auto get_hash_slot_fn() {
-    return nullptr;
+    return std::nullopt;
   }
 };
 
