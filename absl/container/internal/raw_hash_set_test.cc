@@ -31,6 +31,7 @@
 #include <map>
 #include <memory>
 #include <numeric>
+#include <optional>
 #include <ostream>
 #include <random>
 #include <set>
@@ -611,8 +612,8 @@ struct ValuePolicy {
   }
 
   template <class Hash>
-  static constexpr HashSlotFn get_hash_slot_fn() {
-    return nullptr;
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
+    return std::nullopt;
   }
 
   static constexpr bool soo_enabled() { return kSoo; }
@@ -759,8 +760,8 @@ class StringPolicy {
   }
 
   template <class Hash>
-  static constexpr HashSlotFn get_hash_slot_fn() {
-    return nullptr;
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
+    return std::nullopt;
   }
 };
 
@@ -1353,8 +1354,8 @@ struct DecomposePolicy {
   }
 
   template <class Hash>
-  static constexpr HashSlotFn get_hash_slot_fn() {
-    return nullptr;
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
+    return std::nullopt;
   }
 };
 

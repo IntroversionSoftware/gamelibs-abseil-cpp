@@ -16,6 +16,7 @@
 // distributions, all using the default hash function for swisstable.
 
 #include <memory>
+#include <optional>
 #include <regex>  // NOLINT
 #include <vector>
 
@@ -73,7 +74,7 @@ struct Policy {
 
   template <class Hash>
   static constexpr auto get_hash_slot_fn() {
-    return nullptr;
+    return std::nullopt;
   }
 };
 
