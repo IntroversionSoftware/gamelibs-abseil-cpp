@@ -155,9 +155,9 @@ struct hash_policy_traits : common_policy_traits<Policy> {
 // silent error: the address of * will never be NULL [-Werror=address]
 #pragma GCC diagnostic ignored "-Waddress"
 #endif
-    return Policy::template get_hash_slot_fn<Hash, kIsDefault>() == nullptr
+    return !Policy::template get_hash_slot_fn<Hash, kIsDefault>().has_value()
                ? &hash_slot_fn_non_type_erased<Hash, kIsDefault>
-               : Policy::template get_hash_slot_fn<Hash, kIsDefault>();
+               : Policy::template get_hash_slot_fn<Hash, kIsDefault>().value();
 #if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic pop
 #endif
