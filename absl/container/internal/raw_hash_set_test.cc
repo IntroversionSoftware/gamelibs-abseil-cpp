@@ -948,8 +948,8 @@ struct ValuePolicy {
   }
 
   template <class Hash, bool kIsDefault>
-  static constexpr HashSlotFn get_hash_slot_fn() {
-    return nullptr;
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
+    return std::nullopt;
   }
 
   static constexpr bool soo_enabled() { return kSoo; }
@@ -1100,8 +1100,8 @@ class StringPolicy {
   }
 
   template <class Hash, bool kIsDefault>
-  static constexpr HashSlotFn get_hash_slot_fn() {
-    return nullptr;
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
+    return std::nullopt;
   }
 };
 
@@ -2767,8 +2767,8 @@ struct DecomposePolicy {
   }
 
   template <class Hash, bool kIsDefault>
-  static constexpr HashSlotFn get_hash_slot_fn() {
-    return nullptr;
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
+    return std::nullopt;
   }
 };
 

@@ -19,6 +19,7 @@
 #include <cstdint>
 #include <limits>
 #include <numeric>
+#include <optional>
 #include <random>
 #include <string>
 #include <tuple>
@@ -70,8 +71,8 @@ struct IntPolicy {
   }
 
   template <class Hash, bool kIsDefault>
-  static constexpr HashSlotFn get_hash_slot_fn() {
-    return nullptr;
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
+    return std::nullopt;
   }
 };
 
@@ -137,8 +138,8 @@ class StringPolicy {
   }
 
   template <class Hash, bool kIsDefault>
-  static constexpr HashSlotFn get_hash_slot_fn() {
-    return nullptr;
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
+    return std::nullopt;
   }
 };
 
