@@ -39,6 +39,7 @@
 
 #include <cstddef>
 #include <memory>
+#include <optional>
 #include <type_traits>
 
 #include "absl/algorithm/container.h"
@@ -574,8 +575,8 @@ struct NodeHashSetPolicy
   static size_t element_space_used(const T*) { return sizeof(T); }
 
   template <class Hash, bool kIsDefault>
-  static constexpr HashSlotFn get_hash_slot_fn() {
-    return &TypeErasedDerefAndApplyToSlotFn<Hash, T, kIsDefault>;
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
+    return std::optional<HashSlotFn>(&TypeErasedDerefAndApplyToSlotFn<Hash, T, kIsDefault>);
   }
 };
 }  // namespace container_internal
