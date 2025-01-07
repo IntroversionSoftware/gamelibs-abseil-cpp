@@ -20,6 +20,7 @@
 #include <cstdint>
 #include <limits>
 #include <memory>
+#include <optional>
 #include <regex>  // NOLINT
 #include <string>
 #include <utility>
@@ -83,7 +84,7 @@ struct Policy {
 
   template <class Hash, bool kIsDefault>
   static constexpr auto get_hash_slot_fn() {
-    return nullptr;
+    return std::nullopt;
   }
 };
 
