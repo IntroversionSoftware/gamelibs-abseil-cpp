@@ -34,6 +34,7 @@
 
 #include <cstddef>
 #include <memory>
+#include <optional>
 #include <type_traits>
 #include <utility>
 
@@ -559,8 +560,8 @@ struct FlatHashSetPolicy {
   static size_t space_used(const T*) { return 0; }
 
   template <class Hash>
-  static constexpr HashSlotFn get_hash_slot_fn() {
-    return &TypeErasedApplyToSlotFn<Hash, T>;
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
+    return std::optional<HashSlotFn>(&TypeErasedApplyToSlotFn<Hash, T>);
   }
 };
 }  // namespace container_internal

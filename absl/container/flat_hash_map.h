@@ -34,6 +34,7 @@
 
 #include <cstddef>
 #include <memory>
+#include <optional>
 #include <type_traits>
 #include <utility>
 
@@ -661,10 +662,10 @@ struct FlatHashMapPolicy {
   }
 
   template <class Hash>
-  static constexpr HashSlotFn get_hash_slot_fn() {
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
     return memory_internal::IsLayoutCompatible<K, V>::value
-               ? &TypeErasedApplyToSlotFn<Hash, K>
-               : nullptr;
+               ? std::optional<HashSlotFn>(&TypeErasedApplyToSlotFn<Hash, K>)
+               : std::nullopt;
   }
 
   static size_t space_used(const slot_type*) { return 0; }
