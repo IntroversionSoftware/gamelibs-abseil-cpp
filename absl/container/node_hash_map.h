@@ -40,6 +40,7 @@
 
 #include <cstddef>
 #include <memory>
+#include <optional>
 #include <type_traits>
 #include <utility>
 
@@ -686,11 +687,10 @@ class NodeHashMapPolicy
   static const Value& value(const value_type* elem) { return elem->second; }
 
   template <class Hash, bool kIsDefault>
-  static constexpr HashSlotFn get_hash_slot_fn() {
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
     return memory_internal::IsLayoutCompatible<Key, Value>::value
-               ? &TypeErasedDerefAndApplyToSlotFirstFn<Hash, value_type,
-                                                       kIsDefault>
-               : nullptr;
+               ? std::optional<HashSlotFn>(&TypeErasedDerefAndApplyToSlotFirstFn<Hash, Key, kIsDefault>)
+               : std::nullopt;
   }
 };
 }  // namespace container_internal
