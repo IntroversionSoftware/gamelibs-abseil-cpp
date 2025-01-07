@@ -17,6 +17,7 @@
 #include <functional>
 #include <limits>
 #include <memory>
+#include <optional>
 #include <ostream>
 #include <set>
 #include <type_traits>
@@ -181,8 +182,8 @@ struct Policy {
   static slot_type& element(slot_type* slot) { return *slot; }
 
   template <class Hash, bool kIsDefault>
-  static constexpr HashSlotFn get_hash_slot_fn() {
-    return nullptr;
+  static constexpr std::optional<HashSlotFn> get_hash_slot_fn() {
+    return std::nullopt;
   }
 };
 
