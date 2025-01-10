@@ -69,6 +69,17 @@
 #define ABSL_RANDOM_INTERNAL_ATTRIBUTE_NEVER_INLINE
 #endif
 
+// Windows ARM64 intrinsics, in case the SDK is too old
+#if defined(ABSL_OS_WIN) && defined(ABSL_ARCH_AARCH64)
+#ifndef ARM64_CNTVCT_EL0
+#define ARM64_CNTVCT_EL0 ARM64_SYSREG(3, 3, 14, 0, 2)
+#endif
+#ifndef ARM64_CNTFRQ_EL0
+#define ARM64_CNTFRQ_EL0 ARM64_SYSREG(3, 3, 14, 0, 0)
+#endif
+#pragma intrinsic(_ReadStatusReg)
+#endif
+
 namespace absl {
 ABSL_NAMESPACE_BEGIN
 namespace random_internal_nanobenchmark {
@@ -237,6 +248,25 @@ inline uint64_t Start64() {
       // "memory" avoids reordering. rdx = TSC >> 32.
       // "cc" = flags modified by SHL.
       : "rdx", "memory", "cc");
+#endif
+#elif defined(ABSL_ARCH_AARCH64)
+#if defined(ABSL_OS_WIN)
+  _ReadWriteBarrier();
+  __isb(_ARM64_BARRIER_SY);
+  _ReadWriteBarrier();
+  t = _ReadStatusReg(ARM64_CNTVCT_EL0);
+  _ReadWriteBarrier();
+  __isb(_ARM64_BARRIER_SY);
+  _ReadWriteBarrier();
+#else
+  asm volatile(
+    "isb\n\t"                // Instruction barrier before reading CNTVCT_EL0
+    "mrs %0, cntvct_el0\n\t" // Read the current counter value
+    "isb"                    // Instruction barrier after reading CNTVCT_EL0
+    : "=r"(t)
+    :
+    // "memory" avoids reordering.
+    : "memory");
 #endif
 #else
   // Fall back to OS - unsure how to reliably query cntvct_el0 frequency.
@@ -730,6 +760,16 @@ double InvariantTicksPerSecond() {
 #elif defined(ABSL_ARCH_X86_64)
   // We assume the TSC is invariant; it is on all recent Intel/AMD CPUs.
   return platform::NominalClockRate();
+#elif defined(ABSL_ARCH_AARCH64)
+#if defined(ABSL_OS_WIN)
+  return _ReadStatusReg(ARM64_CNTFRQ_EL0);
+#else
+  uint64_t cval;
+  asm volatile(
+    "mrs %0, cntfrq_el0"
+  : "=r"(cval));
+  return cval;
+#endif
 #else
   // Fall back to clock_gettime nanoseconds.
   return 1E9;
