@@ -107,7 +107,6 @@ SOURCES := \
     absl/log/internal/vlog_config.cc \
     absl/log/log_entry.cc \
     absl/log/log_sink.cc \
-    absl/log/scoped_mock_log.cc \
     absl/numeric/int128.cc \
     absl/profiling/internal/exponential_biased.cc \
     absl/profiling/internal/periodic_sampler.cc \
@@ -125,7 +124,6 @@ SOURCES := \
     absl/random/seed_gen_exception.cc \
     absl/random/seed_sequences.cc \
     absl/status/internal/status_internal.cc \
-    absl/status/internal/status_matchers.cc \
     absl/status/status.cc \
     absl/status/status_payload_printer.cc \
     absl/status/statusor.cc \
