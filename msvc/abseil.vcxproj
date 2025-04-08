@@ -126,7 +126,6 @@
     <ClCompile Include="..\absl\random\discrete_distribution.cc" />
     <ClCompile Include="..\absl\random\gaussian_distribution.cc" />
     <ClCompile Include="..\absl\random\internal\chi_square.cc" />
-    <ClCompile Include="..\absl\random\internal\pool_urbg.cc" />
     <ClCompile Include="..\absl\random\internal\randen.cc" />
     <ClCompile Include="..\absl\random\internal\randen_detect.cc" />
     <ClCompile Include="..\absl\random\internal\randen_hwaes.cc" />
@@ -408,7 +407,6 @@
     <ClInclude Include="..\absl\random\internal\nonsecure_base.h" />
     <ClInclude Include="..\absl\random\internal\pcg_engine.h" />
     <ClInclude Include="..\absl\random\internal\platform.h" />
-    <ClInclude Include="..\absl\random\internal\pool_urbg.h" />
     <ClInclude Include="..\absl\random\internal\randen.h" />
     <ClInclude Include="..\absl\random\internal\randen_detect.h" />
     <ClInclude Include="..\absl\random\internal\randen_engine.h" />
