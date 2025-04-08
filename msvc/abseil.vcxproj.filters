@@ -357,9 +357,6 @@
     <ClCompile Include="..\absl\random\internal\chi_square.cc">
       <Filter>random\internal</Filter>
     </ClCompile>
-    <ClCompile Include="..\absl\random\internal\pool_urbg.cc">
-      <Filter>random\internal</Filter>
-    </ClCompile>
     <ClCompile Include="..\absl\random\internal\randen.cc">
       <Filter>random\internal</Filter>
     </ClCompile>
@@ -1197,9 +1194,6 @@
       <Filter>random\internal</Filter>
     </ClInclude>
     <ClInclude Include="..\absl\random\internal\platform.h">
-      <Filter>random\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\absl\random\internal\pool_urbg.h">
       <Filter>random\internal</Filter>
     </ClInclude>
     <ClInclude Include="..\absl\random\internal\randen.h">

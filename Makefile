@@ -112,7 +112,6 @@ SOURCES := \
     absl/random/discrete_distribution.cc \
     absl/random/gaussian_distribution.cc \
     absl/random/internal/chi_square.cc \
-    absl/random/internal/pool_urbg.cc \
     absl/random/internal/randen.cc \
     absl/random/internal/randen_detect.cc \
     absl/random/internal/randen_hwaes.cc \
