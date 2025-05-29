@@ -49,7 +49,9 @@
 #define ABSL_INTERNAL_WCHAR_T __wchar_t
 #if defined(_M_X64) && !defined(_M_ARM64EC)
 #include <intrin.h>
+#if !defined(__clang__)
 #pragma intrinsic(_umul128)
+#endif
 #endif  // defined(_M_X64)
 #else   // defined(_MSC_VER)
 #define ABSL_INTERNAL_WCHAR_T wchar_t
