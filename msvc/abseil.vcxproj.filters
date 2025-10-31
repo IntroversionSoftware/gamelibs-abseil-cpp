@@ -366,9 +366,6 @@
     <ClCompile Include="..\absl\random\internal\entropy_pool.cc">
       <Filter>random\internal</Filter>
     </ClCompile>
-    <ClCompile Include="..\absl\random\internal\nanobenchmark.cc">
-      <Filter>random\internal</Filter>
-    </ClCompile>
     <ClCompile Include="..\absl\random\internal\randen.cc">
       <Filter>random\internal</Filter>
     </ClCompile>
@@ -1218,9 +1215,6 @@
       <Filter>random\internal</Filter>
     </ClInclude>
     <ClInclude Include="..\absl\random\internal\mock_validators.h">
-      <Filter>random\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\absl\random\internal\nanobenchmark.h">
       <Filter>random\internal</Filter>
     </ClInclude>
     <ClInclude Include="..\absl\random\internal\nonsecure_base.h">
