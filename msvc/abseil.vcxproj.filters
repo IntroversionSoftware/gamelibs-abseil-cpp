@@ -591,6 +591,9 @@
     <ClCompile Include="..\absl\time\internal\cctz\src\time_zone_lookup.cc">
       <Filter>time\internal\cctz\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\absl\time\internal\cctz\src\time_zone_name_win.cc">
+      <Filter>time\internal\cctz\src</Filter>
+    </ClCompile>
     <ClCompile Include="..\absl\time\internal\cctz\src\time_zone_posix.cc">
       <Filter>time\internal\cctz\src</Filter>
     </ClCompile>
@@ -1569,6 +1572,9 @@
       <Filter>time\internal\cctz\src</Filter>
     </ClInclude>
     <ClInclude Include="..\absl\time\internal\cctz\src\time_zone_libc.h">
+      <Filter>time\internal\cctz\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\absl\time\internal\cctz\src\time_zone_name_win.h">
       <Filter>time\internal\cctz\src</Filter>
     </ClInclude>
     <ClInclude Include="..\absl\time\internal\cctz\src\time_zone_posix.h">
