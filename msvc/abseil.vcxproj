@@ -204,6 +204,7 @@
     <ClCompile Include="..\absl\time\internal\cctz\src\time_zone_info.cc" />
     <ClCompile Include="..\absl\time\internal\cctz\src\time_zone_libc.cc" />
     <ClCompile Include="..\absl\time\internal\cctz\src\time_zone_lookup.cc" />
+    <ClCompile Include="..\absl\time\internal\cctz\src\time_zone_name_win.cc" />
     <ClCompile Include="..\absl\time\internal\cctz\src\time_zone_posix.cc" />
     <ClCompile Include="..\absl\time\internal\cctz\src\zone_info_source.cc" />
     <ClCompile Include="..\absl\time\time.cc" />
@@ -532,6 +533,7 @@
     <ClInclude Include="..\absl\time\internal\cctz\src\time_zone_impl.h" />
     <ClInclude Include="..\absl\time\internal\cctz\src\time_zone_info.h" />
     <ClInclude Include="..\absl\time\internal\cctz\src\time_zone_libc.h" />
+    <ClInclude Include="..\absl\time\internal\cctz\src\time_zone_name_win.h" />
     <ClInclude Include="..\absl\time\internal\cctz\src\time_zone_posix.h" />
     <ClInclude Include="..\absl\time\internal\cctz\src\tzfile.h" />
     <ClInclude Include="..\absl\time\time.h" />
