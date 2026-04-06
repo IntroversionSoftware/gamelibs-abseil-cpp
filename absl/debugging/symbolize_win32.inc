@@ -71,28 +71,70 @@ void InitializeSymbolizer(const char*) {
   ABSL_RAW_LOG(FATAL, "SymInitialize() failed: %llu", error);
 }
 
-bool Symbolize(const void* pc, char* out, int out_size) {
-  if (out_size <= 0) {
+bool Symbolize_Internal(const void* pc, char* out, int out_size) {
+  if (out == nullptr || out_size <= 0) {
     return false;
   }
-  alignas(SYMBOL_INFO) char buf[sizeof(SYMBOL_INFO) + MAX_SYM_NAME];
-  SYMBOL_INFO* symbol = reinterpret_cast<SYMBOL_INFO*>(buf);
+
+  const DWORD64 addr = reinterpret_cast<DWORD64>(pc);
+
+  alignas(SYMBOL_INFO) char sym_buf[sizeof(SYMBOL_INFO) + MAX_SYM_NAME];
+  SYMBOL_INFO* symbol = reinterpret_cast<SYMBOL_INFO*>(sym_buf);
   symbol->SizeOfStruct = sizeof(SYMBOL_INFO);
   symbol->MaxNameLen = MAX_SYM_NAME;
-  if (!SymFromAddr(process, reinterpret_cast<DWORD64>(pc), nullptr, symbol)) {
+
+  IMAGEHLP_MODULE64 module = {};
+  module.SizeOfStruct = sizeof(module);
+
+  const bool have_symbol = SymFromAddr(process, addr, nullptr, symbol) == TRUE;
+  const bool have_module = SymGetModuleInfo64(process, addr, &module) == TRUE;
+
+  if (!have_symbol && !have_module) {
     return false;
   }
+
+  const char* module_name = nullptr;
+  if (have_module) {
+    if (module.ModuleName[0] != '\0') {
+      module_name = module.ModuleName;
+    } else if (module.LoadedImageName[0] != '\0') {
+      module_name = module.LoadedImageName;
+    } else if (module.ImageName[0] != '\0') {
+      module_name = module.ImageName;
+    }
+  }
+
+  char full[512];
+  if (have_symbol && module_name) {
+    _snprintf_s(full, sizeof(full), _TRUNCATE, "%s:%s", module_name, symbol->Name);
+  } else if (have_symbol) {
+    _snprintf_s(full, sizeof(full), _TRUNCATE, "%s", symbol->Name);
+  } else {
+    _snprintf_s(full, sizeof(full), _TRUNCATE, "%s", module_name);
+  }
+
   const size_t out_size_t = static_cast<size_t>(out_size);
-  strncpy(out, symbol->Name, out_size_t);
+  strncpy(out, full, out_size_t);
   if (out[out_size_t - 1] != '\0') {
-    // strncpy() does not '\0' terminate when it truncates.
     static constexpr char kEllipsis[] = "...";
-    size_t ellipsis_size =
+    const size_t ellipsis_size =
         std::min(sizeof(kEllipsis) - 1, out_size_t - 1);
     memcpy(out + out_size_t - ellipsis_size - 1, kEllipsis, ellipsis_size);
     out[out_size_t - 1] = '\0';
   }
+
   return true;
+}
+
+bool Symbolize(const void *pc, char* out, int out_size) {
+  // Try symbolizing once first
+  if (Symbolize_Internal(pc, out, out_size)) {
+    return true;
+  }
+
+  // Failed, try refreshing module list and then symbolize again
+  SymRefreshModuleList(process);
+  return Symbolize_Internal(pc, out, out_size);
 }
 
 ABSL_NAMESPACE_END
