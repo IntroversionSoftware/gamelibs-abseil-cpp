@@ -392,7 +392,17 @@ constexpr bool compare_result_as_less_than(const BoolT r) {
   return r;
 }
 constexpr bool compare_result_as_less_than(const absl::weak_ordering r) {
+#ifdef ABSL_USES_STD_ORDERING
+  // Comparing a std:: ordering against literal 0 routes through the
+  // standard's unspeakable literal-zero parameter, which Clang flags with
+  // -Wzero-as-null-pointer-constant under libstdc++. Naming the value avoids
+  // the literal-zero machinery entirely.
+  return r == absl::weak_ordering::less;
+#else
+  // The absl fallback ordering types only support comparison against a
+  // literal zero, via a mechanism that does not trip the warning.
   return r < 0;
+#endif
 }
 
 template <typename Compare, typename K, typename LK>
