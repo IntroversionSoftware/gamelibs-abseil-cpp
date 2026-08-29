@@ -403,7 +403,10 @@ using FilePtr = std::unique_ptr<FILE, int (*)(FILE*)>;
 
 // fopen(3) adaptor for reading zoneinfo files (read-only binary mode).
 inline FilePtr FOpen(const char* path) {
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) || defined(__MINGW32__)
+  /* MinGW has no O_NONBLOCK, so it cannot take the POSIX branch below;
+     the FIFO/device-node hazard that branch guards against does not
+     apply to Windows zoneinfo paths anyway. */
   FILE* fp;
   if (fopen_s(&fp, path, "rb") != 0) fp = nullptr;
   return FilePtr(fp, fclose);
